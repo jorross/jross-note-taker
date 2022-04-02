@@ -50,7 +50,7 @@ app.post("/api/notes", (req, res) => {
     // Convert the data to a string so we can save it
     noteData.push(newPost);
 
-    fs.writeFile(`./db/db.json`, JSON.stringify(parsedNotes, null, 4), (err) =>
+    fs.writeFile(`./db/db.json`, JSON.stringify(noteData, null, 4), (err) =>
       err
         ? console.error(err)
         : console.log(`Note has been written to JSON file`)
