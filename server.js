@@ -80,9 +80,9 @@ app.delete("/api/notes/:id", (req, res) => {
   // If all the required properties are present
   if (req.params.id) {
     const toDelete = req.params.id;
-    for (let i = 0; i < notesData.length; i++) {
-      if (notesData[i].id != toDelete) {
-        newData.push(notesData[i]);
+    for (let i = 0; i < noteData.length; i++) {
+      if (noteData[i].id != toDelete) {
+        newData.push(noteData[i]);
       }
     }
 
@@ -96,7 +96,7 @@ app.delete("/api/notes/:id", (req, res) => {
     };
 
     console.log(response);
-    res.status(201).json(response);
+    res.status(200).json(response);
   } else {
     res.status(500).json("Error in deleting note");
   }
