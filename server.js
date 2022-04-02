@@ -80,25 +80,15 @@ app.delete("/api/notes/:id", (req, res) => {
   // If all the required properties are present
   if (req.params.id) {
     const toDelete = req.params.id;
-    // Write the string to a file
-    fs.readFile("./db/db.json", "utf8", (err, data) => {
-      if (err || !data) {
-        console.error(err);
-      } else {
-        const notesData = JSON.parse(data);
-
-        // Convert the data to a string so we can save it
-        for (let i = 0; i < notesData.length; i++) {
-          if (notesData[i].id != toDelete) {
-            newData.push(notesData[i]);
-          }
-        }
-
-        fs.writeFile(`./db/db.json`, JSON.stringify(newData, null, 4), (err) =>
-          err ? console.error(err) : console.log(`Note has been Deleted`)
-        );
+    for (let i = 0; i < notesData.length; i++) {
+      if (notesData[i].id != toDelete) {
+        newData.push(notesData[i]);
       }
-    });
+    }
+
+    fs.writeFile(`./db/db.json`, JSON.stringify(newData, null, 4), (err) =>
+      err ? console.error(err) : console.log(`Note has been Deleted`)
+    );
 
     const response = {
       status: "success",
