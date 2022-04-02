@@ -89,7 +89,7 @@ app.delete("/api/notes/:id", (req, res) => {
         noteData[i] = noteData[i + 1];
       }
     }
-    if (noteData[noteData.length - 1].id == toDelete) {
+    if (flag || noteData[noteData.length - 1].id == toDelete) {
       noteData.pop();
     }
 
