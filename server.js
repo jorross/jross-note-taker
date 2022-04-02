@@ -47,26 +47,14 @@ app.post("/api/notes", (req, res) => {
       text,
       id: uuid(),
     };
+    // Convert the data to a string so we can save it
+    noteData.push(newPost);
 
-    // Write the string to a file
-    fs.readFile("./db/db.json", "utf8", (err, data) => {
-      if (err || !data) {
-        console.error(err);
-      } else {
-        const parsedNotes = JSON.parse(data);
-        // Convert the data to a string so we can save it
-        parsedNotes.push(newPost);
-
-        fs.writeFile(
-          `./db/db.json`,
-          JSON.stringify(parsedNotes, null, 4),
-          (err) =>
-            err
-              ? console.error(err)
-              : console.log(`Note has been written to JSON file`)
-        );
-      }
-    });
+    fs.writeFile(`./db/db.json`, JSON.stringify(parsedNotes, null, 4), (err) =>
+      err
+        ? console.error(err)
+        : console.log(`Note has been written to JSON file`)
+    );
 
     const response = {
       status: "success",
